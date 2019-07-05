@@ -1,0 +1,133 @@
+<!DOCTYPE html> 
+<html>
+<title>Retirement Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="retirement.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="retirement.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<body class="cn-light-grey">
+	<div class = "cn-content cn-container cn-padding-36">
+		<h2>When can you retire?</h2>
+		<p>
+			This calculator lets you calculate the age at which you can retire given your
+			current savings, savings rate, expected expenses, and save withdrawal rate.
+		</p>
+	</div>
+	<div class = "cn-content cn-container cn-padding-36">
+		<form onsubmit="calculate()">	
+			<!--User inputs-->			
+			<div class = "cn-container cn-margin-top">
+				<div class = "cn-card">
+				<h3 class = "cn-container cn-center cn-green">Known values today</h3>
+					
+					<!--Savings and Age-->
+					<div class = "row">
+						<div class = "column">
+							Current Savings ($):<br>
+							<input type="number" id="current_savings">
+						</div>
+			
+						<div class = "column">
+							Current Age (yr):<br>
+							<input type="number" id="age" min = "0" max = "9999">
+						</div>
+					</div>	
+					
+					<!--Salary-->
+					<div class = "row">
+						<div class = "column">
+							Salary ($/yr):<br>
+							<input type="number" id="salary">
+						</div>
+			
+						<div class = "column">
+							Savings Rate (%):<br>
+							<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1">
+						</div> 
+					</div>	
+					
+					<!-- Assumptions-->
+					<h3 class = "cn-container cn-center cn-green">Our Assumptions</h3>
+					
+					<!--Advanced Salary-->
+					<div class = "row" id = "salary_options">
+						<div class = "column">
+							Annual Raise (%/yr):<br>
+							<input type="number" id="raise" step = "0.1">
+						</div>
+					</div>
+					<!--Expenses-->
+					<div class = "row">
+						<div class = "column">
+							Expenses at retirement ($/yr):<br>
+							<input type="number" id="expense" min = "0">
+						</div>
+						
+						<div class = "column">
+							Post-retirement expense change (%/yr):<br>
+							<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5">
+						</div>
+				
+					</div>
+					
+					<!--Interest-->
+					<div class = "row" id = "basic_interest_options">
+						<div class = "column">
+							Pre-retirement growth (%):<br>
+							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99">
+						</div>
+						<div class = "column">
+							Post-retirement growth (%):<br>
+							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99">
+						</div>
+					</div>
+					
+					<!--Goals-->
+					<h3 class = "cn-container cn-center cn-green">Your Goals</h3>										
+					
+					<!--Retirement years-->
+					<div class = "row">
+						<div class = "column">
+							Retirement Age (yr):<br>
+							<input type="number" id="retirement_age" min = "0" max = "9999">
+						</div>
+						<div class = "column">
+							Retirement Length (yrs):<br>
+							<input type="number" id="retirement_length" min = "0" max = "9999">
+						</div>
+					</div>
+				</div>
+				
+				<!--Buttons-->
+				<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:66%" onclick = "calculate()">
+						Calculate
+				</button>
+				<button class = "cn-margin-top "type = "reset" style= "padding:10px 1%; width:33%">
+						Clear
+				</button>
+			</div>
+		</form>
+		
+		<div class = "cn-container cn-content cn-center cn-padding-24">
+			<div id="chart" align='center'>
+		</div>
+	</div>
+	
+	
+	
+	<div class = "cn-content cn-container cn-padding-36">
+		<p>
+			*This tool is neither definitive nor deterministic.You should make any career, financial, or other decisions with great care.
+			Seek advice from a licensed financial advisor before investing.
+		</p>
+	</div>
+	
+</body>
+
+</html>
