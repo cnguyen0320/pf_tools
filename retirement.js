@@ -220,16 +220,16 @@ function populate_defaults(){
 	document.getElementById('retirement_age').value = 40;
 	document.getElementById('retirement_length').value = 50;
 	
-	if(value = getCookie('current_savings')) document.getElementById('current_savings').value = value
-	if(value = getCookie('age')) document.getElementById('age').value = value
-	if(value = getCookie('salary')) document.getElementById('salary').value = value
-	if(value = getCookie('savings_rate')) document.getElementById('savings_rate').value = value
+	if(savings = getCookie('current_savings')) document.getElementById('current_savings').value = value
+	if(age = getCookie('age')) document.getElementById('age').value = value
+	if(salary = getCookie('salary')) document.getElementById('salary').value = value
+	if(savings_rate = getCookie('savings_rate')) document.getElementById('savings_rate').value = value
 	if(value = getCookie('raise')) document.getElementById('raise').value = value
 	if(value = getCookie('expense')) document.getElementById('expense').value = value
 	if(value = getCookie('expense_change')) document.getElementById('expense_change').value = value
 	if(value = getCookie('pre_interest')) document.getElementById('pre_interest').value = value
 	if(value = getCookie('post_interest')) document.getElementById('post_interest').value = value
-	if(value = getCookie('retirement_age')) document.getElementById('retirement_age').value = value
+	if(value = getCookie('retirement_start')) document.getElementById('retirement_age').value = value
 	if(value = getCookie('retirement_length')) document.getElementById('retirement_length').value = value
 	
 }
@@ -261,7 +261,7 @@ function saveDefault(){
 	setCookie("expense_change", document.getElementById('expense_change').value)
 	setCookie("pre_interest", document.getElementById('pre_interest').value)
 	setCookie("post_interest", document.getElementById('post_interest').value)
-	setCookie("retirement_age", document.getElementById('retirement_age').value)
+	setCookie("retirement_start", document.getElementById('retirement_age').value)
 	setCookie("retirement_length", document.getElementById('retirement_length').value)
 	console.log(document.cookie)
 }
