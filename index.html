@@ -12,11 +12,12 @@
 
 
 <body class="cn-light-grey">
+	
 	<div class = "cn-content cn-container cn-padding-36">
 		<h2>When can you retire?</h2>
 		<p>
-			This calculator lets you calculate the age at which you can retire given your
-			current savings, savings rate, expected expenses, and save withdrawal rate.
+			This calculator calculates the age at which you can retire given your
+			current savings, savings rate, expected expenses, and save withdrawal rate.*
 		</p>
 	</div>
 	<div class = "cn-content cn-container cn-padding-36">
@@ -30,12 +31,12 @@
 					<div class = "row">
 						<div class = "column">
 							Current Savings ($):<br>
-							<input type="number" id="current_savings">
+							<input type="number" id="current_savings" style="width:10ch">
 						</div>
 			
 						<div class = "column">
 							Current Age (yr):<br>
-							<input type="number" id="age" min = "0" max = "9999">
+							<input type="number" id="age" min = "0" max = "999" style="width:10ch">
 						</div>
 					</div>	
 					
@@ -43,49 +44,52 @@
 					<div class = "row">
 						<div class = "column">
 							Salary ($/yr):<br>
-							<input type="number" id="salary">
+							<input type="number" id="salary" style="width:10ch">
 						</div>
 			
 						<div class = "column">
 							Savings Rate (%):<br>
-							<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1">
+							<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch">
 						</div> 
 					</div>	
 					
 					<!-- Assumptions-->
 					<h3 class = "cn-container cn-center cn-green">Our Assumptions</h3>
 					
-					<!--Advanced Salary-->
+					<!--Raises-->
 					<div class = "row" id = "salary_options">
 						<div class = "column">
 							Annual Raise (%/yr):<br>
-							<input type="number" id="raise" step = "0.1">
+							<input type="number" id="raise" step = "0.1" style="width:10ch">
+						</div>
+						
+						<div class = "column">
+							Pre-retirement growth (%):<br>
+							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch">
 						</div>
 					</div>
 					<!--Expenses-->
 					<div class = "row">
 						<div class = "column">
 							Expenses at retirement ($/yr):<br>
-							<input type="number" id="expense" min = "0">
+							<input type="number" id="expense" min = "0" style="width:10ch">
 						</div>
 						
 						<div class = "column">
-							Post-retirement expense change (%/yr):<br>
-							<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5">
+							Post-retirement growth (%):<br>
+							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch">
 						</div>
+						
 				
 					</div>
 					
 					<!--Interest-->
 					<div class = "row" id = "basic_interest_options">
 						<div class = "column">
-							Pre-retirement growth (%):<br>
-							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99">
+							Retirement expense change (%/yr):<br>
+							<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch">
 						</div>
-						<div class = "column">
-							Post-retirement growth (%):<br>
-							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99">
-						</div>
+						
 					</div>
 					
 					<!--Goals-->
@@ -95,29 +99,30 @@
 					<div class = "row">
 						<div class = "column">
 							Retirement Age (yr):<br>
-							<input type="number" id="retirement_age" min = "0" max = "9999">
+							<input type="number" id="retirement_age" min = "0" max = "9999" style="width:10ch">
 						</div>
 						<div class = "column">
 							Retirement Length (yrs):<br>
-							<input type="number" id="retirement_length" min = "0" max = "9999">
+							<input type="number" id="retirement_length" min = "0" max = "9999" style="width:10ch">
 						</div>
 					</div>
 				</div>
 				
 				<!--Buttons-->
-				<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:66%" onclick = "calculate()">
-						Calculate
-				</button>
-				<button class = "cn-margin-top "type = "reset" style= "padding:10px 1%; width:33%">
-						Clear
-				</button>
+				<div class = cn-center>
+					<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:65%" onclick = "calculate()">
+							Calculate
+					</button>
+					<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:33%" onclick = "saveDefault()">
+							Save
+					</button>
+				</div>
 			</div>
 		</form>
 		
 		<div class = "cn-container cn-content cn-center cn-padding-24">
-			<div id="chart" align='center'>
+			<div id="chart" align='center'></div>
 		</div>
-	</div>
 	
 	
 	
@@ -126,6 +131,7 @@
 			*This tool is neither definitive nor deterministic.You should make any career, financial, or other decisions with great care.
 			Seek advice from a licensed financial advisor before investing.
 		</p>
+	</div>
 	</div>
 	
 </body>
