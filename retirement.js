@@ -246,12 +246,12 @@ function getCookie(name){
 function setCookie(name, value){
 	var today = new Date();
 	var expiry = new Date(today.getTime() + 30 *24 * 3600 * 1000) //plus 30 days
-	document.cookie = name + "=" + value + ", path=/, expires=" + expiry.toGMTString();
-	console.log(document.cookie)
+	document.cookie = name + "=" + value + "; path=/; expires=" + expiry.toGMTString();
 	return true
 }
 
 function saveDefault(){
+	console.log(document.cookie)
 	setCookie("current_savings", document.getElementById('current_savings').value)
 	setCookie("age", document.getElementById('age').value)
 	setCookie("salary", document.getElementById('salary').value)
@@ -263,6 +263,7 @@ function saveDefault(){
 	setCookie("post_interest", document.getElementById('post_interest').value)
 	setCookie("retirement_age", document.getElementById('retirement_age').value)
 	setCookie("retirement_length", document.getElementById('retirement_length').value)
+	console.log(document.cookie)
 }
 	
 	
