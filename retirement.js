@@ -16,16 +16,17 @@ class Year {
 	}
 	
 	//returns array as [age, assets BoY, cash flow, interest, assets EoY]
-	get asArray(){
+	asArray(){
 		var array = []
 		array.push(this.age)
-		array.push(this.boy)
-		array.push(this.cash_flow)
-		array.push(this.interest_gain)
-		array.push(this.eoy)
+		array.push(Math.round(this.boy*100)/100)
+		array.push(Math.round(this.cash_flow*100)/100)
+		array.push(Math.round(this.interest*100)/100)
+		array.push(Math.round(this.eoy*100)/100)
 		return array
 	}
 	
+	//creates a tooltip for the Google Chart using HTML
 	createToolTip(){
 		var formatter = new Intl.NumberFormat('en-US', {
   			style: 'currency',
@@ -35,18 +36,16 @@ class Year {
 		});
 		
 		var string = '<div align = "left" style=" font-family:Arial; width: 20ch">'
-		
 		string+="<b>"+this.age + "</b><br>"
 		
 		//add opening assets
 		string += "BoY: <b>" + formatter.format(Math.round(this.boy)) + "</b><br>"
 		
 		//add cash flow
-		string += "Net income: <b>" + formatter.format(Math.round(this.cash_flow)) + "</b><br>"
+		string += "Cash Flow: <b>" + formatter.format(Math.round(this.cash_flow)) + "</b><br>"
 		
 		//add ending assets
 		string += "EoY: <b>" + formatter.format(Math.round(this.eoy)) + "</b><br>"
-		
 		string+= "</div>"
 
 		return string
@@ -63,13 +62,52 @@ function calculate(){
 	workingArray = arrays[0]
 	retiredArray = arrays[1]
 	
+	//draw chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
-	google.charts.setOnLoadCallback(function call(){
-		drawChart()
-		});
-		
+	google.charts.setOnLoadCallback(drawChart);
+
+	//draw table
+	google.charts.load('current', {'packages':['table']});
+	google.charts.setOnLoadCallback(drawTable);
+			
 }
 
+function drawTable(){
+	//initiate the google data table
+	var data = new google.visualization.DataTable()
+	data.addColumn('number', 'Year')
+	data.addColumn('number', 'Opening ($)')
+	data.addColumn('number', 'Cash Flow ($)')
+	data.addColumn('number', 'Interest Gained ($)')
+	data.addColumn('number', 'End of Year')
+	
+	//add working years to data table
+	for(var i = 0; i<workingArray.length; i++){
+		data.addRows([workingArray[i].asArray()])
+	}
+
+	//add retired years to data table
+	for(var i = 0; i<retiredArray.length; i++){
+		data.addRows([retiredArray[i].asArray()])
+	}
+	
+	var options = {
+		width: '100%', 
+		height: '100%',
+		style: 'font-family:Arial'
+	}
+	
+	var formatter = new google.visualization.NumberFormat({prefix: '$', negativeColor: 'red', negativeParens: true});
+	formatter.format(data, 1);
+	formatter.format(data, 2);
+	formatter.format(data, 3);
+	formatter.format(data, 4);
+	
+	
+	var table = new google.visualization.Table(document.getElementById('table'));
+    table.draw(data, options);
+	
+}
 
 function drawChart(){
 	
@@ -90,7 +128,7 @@ function drawChart(){
 	}
 
 	//add the first year of retirement
-	//this line allows us to connect the lines
+	//this allows us to connect the lines
 	asset_at_retire = retiredArray[0].boy
 	data.addRows([[age+1, asset_at_retire, retiredArray[0].createToolTip(),null, null]]) 
 	
@@ -101,10 +139,6 @@ function drawChart(){
 		var tooltip = retiredArray[i].createToolTip()
 		data.addRows([[age, null, null,asset, tooltip]])
 	}
-	
-	//Add last data point EOY
-//	asset_at_retire = retiredArray[retiredArray.length-1].eoy
-//	data.addRows([[age+1, null, null,asset_at_retire, 'hi']])
 	
 	//options for the chart
 	var options = {
@@ -129,8 +163,13 @@ function drawChart(){
     //draw the chart
 	var chart = new google.visualization.LineChart(document.getElementById('chart'))
 	chart.draw(data, options);
+	
+	$('#results').show()
 	}
 
+/*
+ * Computes the retirement calculation and saves the values into global arrays
+*/
 function compute(){
 	
 		var assets = Number(document.getElementById("current_savings").value);
@@ -202,24 +241,27 @@ function compute(){
 			age++;
 			expense *= (1+expense_change)
 		}
-	
+		
 		return [workingArray, retiredArray]
 	}
 	
-
+/*
+ * Populates the values using cookies or a saved default value set
+*/
 function populate_defaults(){
-	document.getElementById('current_savings').value = 100000;
+	document.getElementById('current_savings').value = 20000;
 	document.getElementById('age').value = 24;
-	document.getElementById('salary').value = 80000;
-	document.getElementById('savings_rate').value = 45;
+	document.getElementById('salary').value = 60000;
+	document.getElementById('savings_rate').value = 20;
 	document.getElementById('raise').value = 1;
 	document.getElementById('expense').value = 50000;
-	document.getElementById('expense_change').value = 0.5;
+	document.getElementById('expense_change').value = 0;
 	document.getElementById('pre_interest').value = 7;
 	document.getElementById('post_interest').value = 4;
-	document.getElementById('retirement_age').value = 40;
-	document.getElementById('retirement_length').value = 50;
+	document.getElementById('retirement_age').value = 50;
+	document.getElementById('retirement_length').value = 40;
 	
+	//Load the cookies if they can be found
 	if(savings = getCookie('current_savings')) document.getElementById('current_savings').value = value
 	if(age = getCookie('age')) document.getElementById('age').value = value
 	if(salary = getCookie('salary')) document.getElementById('salary').value = value
@@ -234,7 +276,9 @@ function populate_defaults(){
 	
 }
 	
-
+/*
+ * Get a previously saved cookie
+*/
 function getCookie(name){
 	var re = new RegExp(name + "=([^;]+)");
     var value = re.exec(document.cookie);
@@ -243,6 +287,10 @@ function getCookie(name){
     
 }
 
+
+/*
+ * Set a Cookie to store values
+*/
 function setCookie(name, value){
 	var today = new Date();
 	var expiry = new Date(today.getTime() + 30 *24 * 3600 * 1000) //plus 30 days
@@ -250,8 +298,10 @@ function setCookie(name, value){
 	return true
 }
 
+/*
+ * Saves the input values as default using Cookies. Valid for 30 days
+*/
 function saveDefault(){
-	console.log(document.cookie)
 	setCookie("current_savings", document.getElementById('current_savings').value)
 	setCookie("age", document.getElementById('age').value)
 	setCookie("salary", document.getElementById('salary').value)
@@ -263,9 +313,13 @@ function saveDefault(){
 	setCookie("post_interest", document.getElementById('post_interest').value)
 	setCookie("retirement_start", document.getElementById('retirement_age').value)
 	setCookie("retirement_length", document.getElementById('retirement_length').value)
-	console.log(document.cookie)
+
 }
-	
+
+function collapse(id){
+	$("#"+id).slideToggle()
+}
+
 	
 /*
 The below monitors the window and redraws the chart to ensure it is the right size
