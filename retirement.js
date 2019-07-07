@@ -69,6 +69,8 @@ function calculate(){
 	//draw table
 	google.charts.load('current', {'packages':['table']});
 	google.charts.setOnLoadCallback(drawTable);
+	
+	$('#results_bar').show()
 			
 }
 
@@ -76,9 +78,9 @@ function drawTable(){
 	//initiate the google data table
 	var data = new google.visualization.DataTable()
 	data.addColumn('number', 'Year')
-	data.addColumn('number', 'Opening ($)')
-	data.addColumn('number', 'Cash Flow ($)')
-	data.addColumn('number', 'Interest Gained ($)')
+	data.addColumn('number', 'Opening')
+	data.addColumn('number', 'Cash Flow')
+	data.addColumn('number', 'Interest gain')
 	data.addColumn('number', 'End of Year')
 	
 	//add working years to data table
@@ -93,17 +95,18 @@ function drawTable(){
 	
 	var options = {
 		width: '100%', 
-		height: '100%',
-		style: 'font-family:Arial'
+		height: 500,
+		style: 'font-family:Verdana',
+		sort: 'disable',
+		backgroundColor: { fill:'transparent' }
 	}
 	
 	var formatter = new google.visualization.NumberFormat({prefix: '$', negativeColor: 'red', negativeParens: true});
-	formatter.format(data, 1);
-	formatter.format(data, 2);
-	formatter.format(data, 3);
-	formatter.format(data, 4);
-	
-	
+	formatter.format(data, 1)
+	formatter.format(data, 2)
+	formatter.format(data, 3)
+	formatter.format(data, 4)
+
 	var table = new google.visualization.Table(document.getElementById('table'));
     table.draw(data, options);
 	
@@ -153,11 +156,11 @@ function drawChart(){
         },
         width: "auto",
         height: 500,
-        
         lineWidth: 4,
         pointSize: 2,
-        
-        legend: {position: 'top'}
+        backgroundColor: { fill:'transparent' },
+        legend: {position: 'top'},
+        'chartArea': {'width': '80%', 'height': '80%', 'right':5}
       };
 
     //draw the chart
@@ -316,8 +319,9 @@ function saveDefault(){
 
 }
 
-function collapse(id){
-	$("#"+id).slideToggle()
+function openResult(id){
+	$(".results").hide();
+	$("#"+id).show();
 }
 
 	

@@ -223,7 +223,7 @@ textarea {
 
 html,
 body {
-	font-family: Verdana, sans-serif;
+	font-family: Arial, sans-serif;
 	font-size: 15px;
 	line-height: 1.5
 }
@@ -1228,7 +1228,7 @@ position:relative
 
 .cn-button:hover {
 	color: #000!important;
-	background-color: #2196F3!important
+	background-color: #4CAF50!important
 }
 
 .cn-transparent,
@@ -1383,7 +1383,6 @@ position:relative
 .cn-hover-light-grey:hover,
 .cn-light-gray,
 .cn-hover-light-gray:hover {
-	color: #000!important;
 	background-color: #f1f1f1!important
 }
 

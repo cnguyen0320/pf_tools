@@ -16,8 +16,10 @@
 	<div class = "cn-content cn-container cn-padding-36">
 		<h2>When can you retire?</h2>
 		<p>
-			This calculator calculates the age at which you can retire given your
-			current savings, savings rate, expected expenses, and save withdrawal rate.*
+			This tool calculates your retirement outlook, allowing you to tweak parameters and
+			simulate different situations in order to reach your goal.
+			Input your parameters and click calculate to receive a graph and detailed data.
+			You can also save your input values to cookies to retain your values for a later date.
 		</p>
 	</div>
 	<div class = "cn-content cn-container cn-padding-36">
@@ -120,12 +122,18 @@
 			</div>
 		</form>
 		
+		<!--Results pane-->
 		<div class = "cn-container">
 			<div class = "cn-card">
 				<h3 class="cn-container cn-center cn-green">Results</h3>
 				<div class = "cn-container cn-content cn-center cn-padding-24" id = "results">
-					<div id="chart" align='center'></div>
-					<div id="table" align='center'></div>
+					<div class = "results" id="chart" align='center'></div>
+					<div class = "results hide" id="table" align='center'></div>
+					
+				</div>
+				<div class="cn-bar hide" id = "results_bar">
+					<button class="cn-bar-item cn-button" onclick="openResult('chart')"><b>Chart</b></button>
+					<button class="cn-bar-item cn-button" onclick="openResult('table')"><b>Table</button>
 				</div>
 			</div>
 		</div>
