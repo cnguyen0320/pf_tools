@@ -265,10 +265,10 @@ function populate_defaults(){
 	document.getElementById('retirement_length').value = 40;
 	
 	//Load the cookies if they can be found
-	if(savings = getCookie('current_savings')) document.getElementById('current_savings').value = value
-	if(age = getCookie('age')) document.getElementById('age').value = value
-	if(salary = getCookie('salary')) document.getElementById('salary').value = value
-	if(savings_rate = getCookie('savings_rate')) document.getElementById('savings_rate').value = value
+	if(value = getCookie('current_savings')) document.getElementById('current_savings').value = value
+	if(value = getCookie('age')) document.getElementById('age').value = value
+	if(value = getCookie('salary')) document.getElementById('salary').value = value
+	if(value = getCookie('savings_rate')) document.getElementById('savings_rate').value = value
 	if(value = getCookie('raise')) document.getElementById('raise').value = value
 	if(value = getCookie('expense')) document.getElementById('expense').value = value
 	if(value = getCookie('expense_change')) document.getElementById('expense_change').value = value
