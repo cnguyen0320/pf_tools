@@ -297,7 +297,7 @@ function getCookie(name){
 function setCookie(name, value){
 	var today = new Date();
 	var expiry = new Date(today.getTime() + 30 *24 * 3600 * 1000) //plus 30 days
-	document.cookie = name + "=" + value + ", path=/, expires=" + expiry.toUTCString();
+	document.cookie = name + "=" + value + "; path=/; expires=" + expiry.toUTCString() + ";";
 	return true
 }
 

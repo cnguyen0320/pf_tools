@@ -33,12 +33,12 @@
 					<div class = "row">
 						<div class = "column">
 							Current Savings ($):<br>
-							<input type="number" id="current_savings" style="width:10ch">
+							<input type="number" id="current_savings" style="width:10ch" inputmode="numeric">
 						</div>
 			
 						<div class = "column">
 							Current Age (yr):<br>
-							<input type="number" id="age" min = "0" max = "999" style="width:10ch">
+							<input type="number" id="age" min = "0" max = "999" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>	
 					
@@ -46,12 +46,12 @@
 					<div class = "row">
 						<div class = "column">
 							Salary ($/yr):<br>
-							<input type="number" id="salary" style="width:10ch">
+							<input type="number" id="salary" style="width:10ch" inputmode="numeric"</input>
 						</div>
 			
 						<div class = "column">
 							Savings Rate (%):<br>
-							<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch">
+							<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric">
 						</div> 
 					</div>	
 					
@@ -62,24 +62,24 @@
 					<div class = "row" id = "salary_options">
 						<div class = "column">
 							Annual Raise (%/yr):<br>
-							<input type="number" id="raise" step = "0.1" style="width:10ch">
+							<input type="number" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
 						</div>
 						
 						<div class = "column">
 							Pre-retirement growth (%):<br>
-							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch">
+							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>
 					<!--Expenses-->
 					<div class = "row">
 						<div class = "column">
 							Expenses at retirement ($/yr):<br>
-							<input type="number" id="expense" min = "0" style="width:10ch">
+							<input type="number" id="expense" min = "0" style="width:10ch" inputmode="numeric">
 						</div>
 						
 						<div class = "column">
 							Post-retirement growth (%):<br>
-							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch">
+							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
 						</div>
 						
 				
@@ -89,7 +89,7 @@
 					<div class = "row" id = "basic_interest_options">
 						<div class = "column">
 							Retirement expense change (%/yr):<br>
-							<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch">
+							<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch" inputmode="numeric">
 						</div>
 						
 					</div>
@@ -101,11 +101,11 @@
 					<div class = "row">
 						<div class = "column">
 							Retirement Age (yr):<br>
-							<input type="number" id="retirement_age" min = "0" max = "9999" style="width:10ch">
+							<input type="number" id="retirement_age" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
 						</div>
 						<div class = "column">
 							Retirement Length (yrs):<br>
-							<input type="number" id="retirement_length" min = "0" max = "9999" style="width:10ch">
+							<input type="number" id="retirement_length" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>
 				</div>
