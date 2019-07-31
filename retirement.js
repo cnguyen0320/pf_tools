@@ -303,15 +303,29 @@ function getCookie(name){
     
 }
 
-
 /*
  * Set a Cookie to store values
 */
 function setCookie(name, value){
 	var today = new Date();
 	var expiry = new Date(today.getTime() + 30 *24 * 3600 * 1000) //plus 30 days
-	document.cookie = name + "=" + value + "; path=/; expires=" + expiry.toUTCString() + ";";
+	document.cookie = name + "=" + value + "; expires=" + expiry.toUTCString() + ";";
 	return true
+}
+
+/*
+ * Deletes all cookies
+*/
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+    alert("Cookies deleted")
 }
 
 /*

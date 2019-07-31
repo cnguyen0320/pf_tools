@@ -33,12 +33,12 @@
 					<div class = "row">
 						<div class = "column">
 							Current Savings ($):<br>
-							<input type="number" pattern="[0-9]*" id="current_savings" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="current_savings" style="width:10ch" inputmode="numeric">
 						</div>
 			
 						<div class = "column">
 							Current Age (yr):<br>
-							<input type="number" pattern="[0-9]*" id="age" min = "0" max = "999" style="width:10ch" inputmode="numeric">
+							<input type="tel" pattern = "[0-9*]"id="age" min = "0" max = "999" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>	
 					
@@ -46,12 +46,12 @@
 					<div class = "row">
 						<div class = "column">
 							Salary ($/yr):<br>
-							<input type="number" pattern="[0-9]*" id="salary" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+							<input type="tel" id="salary" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
 						</div>
 			
 						<div class = "column">
 							Savings Rate (%):<br>
-							<input type="number" pattern="[0-9]*" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+							<input type="tel" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
 						</div> 
 					</div>	
 					<div class = "cn-center cn-text-red" id="savings_summary"></div>
@@ -63,24 +63,24 @@
 					<div class = "row" id = "salary_options">
 						<div class = "column">
 							Annual Raise (%/yr):<br>
-							<input type="number" pattern="[0-9]*" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
 						</div>
 						
 						<div class = "column">
 							Pre-retirement growth (%):<br>
-							<input type="number" pattern="[0-9]*" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>
 					<!--Expenses-->
 					<div class = "row">
 						<div class = "column">
 							Expenses at retirement ($/yr):<br>
-							<input type="number" pattern="[0-9]*" id="expense" min = "0" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="expense" min = "0" style="width:10ch" inputmode="numeric">
 						</div>
 						
 						<div class = "column">
 							Post-retirement growth (%):<br>
-							<input type="number" pattern="[0-9]*" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
 						</div>
 						
 				
@@ -90,7 +90,7 @@
 					<div class = "row" id = "basic_interest_options">
 						<div class = "column">
 							Retirement expense change (%/yr):<br>
-							<input type="number" pattern="[0-9]*" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch" inputmode="numeric">
 						</div>
 						
 					</div>
@@ -102,11 +102,11 @@
 					<div class = "row">
 						<div class = "column">
 							Retirement Age (yr):<br>
-							<input type="number" pattern="[0-9]*" id="retirement_age" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="retirement_age" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
 						</div>
 						<div class = "column">
 							Retirement Length (yrs):<br>
-							<input type="number" pattern="[0-9]*" id="retirement_length" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+							<input type="tel" id="retirement_length" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
 						</div>
 					</div>
 				</div>
@@ -142,8 +142,8 @@
 	
 	<div class = "cn-content cn-container cn-padding-36">
 		<p>
-			*This tool is neither definitive nor deterministic.You should make any career, financial, or other decisions with great care.
-			Seek advice from a licensed financial advisor before investing.
+			*This tool is neither definitive nor deterministic. You should make any career, financial, or other decisions with great care.
+			Seek advice from a financial advisor before investing. <a onclick="deleteAllCookies()" style="cursor:pointer"><u>Click here</u></a> to clear saved cookies.
 		</p>
 	</div>
 	</div>
