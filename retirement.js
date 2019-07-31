@@ -4,6 +4,7 @@ var retiredArray = []
 
 $(document).ready(function(){
 	populate_defaults();
+	savingsSummary();
 });
 
 class Year {
@@ -93,9 +94,14 @@ function drawTable(){
 		data.addRows([retiredArray[i].asArray()])
 	}
 	
+	var height_val = 500
+	if(isMobileDevice()){
+		height_val = 250
+	}
+	
 	var options = {
 		width: '100%', 
-		height: 500,
+		height: height_val,
 		style: 'font-family:Verdana',
 		sort: 'disable',
 		backgroundColor: { fill:'transparent' }
@@ -144,6 +150,10 @@ function drawChart(){
 	}
 	
 	//options for the chart
+	var height_val = 500
+	if(isMobileDevice()){
+		height_val = 250
+	}
 	var options = {
 		tooltip: {isHtml: true},
 		vAxis: {
@@ -155,7 +165,7 @@ function drawChart(){
           maxValue: retiredArray[retiredArray.length-1].age + 5
         },
         width: "auto",
-        height: 500,
+        height: height_val,
         lineWidth: 4,
         pointSize: 2,
         backgroundColor: { fill:'transparent' },
@@ -202,11 +212,14 @@ function compute(){
 			var interest_gain = 0
 			
 			//calculate gains and interest on a monthly basis
-			for(var i = 0; i < 12; i++){
-				interest_gain += assets * (1 + monthly_interest)
+			/*for(var i = 0; i < 12; i++){
+				interest_gain += assets * (monthly_interest)
 				assets = (assets + monthly_gain)*(1+monthly_interest)
 			}
-					
+			*/
+			interest_gain = assets*(pre_interest)
+			assets += salary*savings_rate + interest_gain
+			
 			var cash_flow = assets - start
 		
 			//round to 2 decimals
@@ -317,14 +330,44 @@ function saveDefault(){
 	setCookie("retirement_start", document.getElementById('retirement_age').value)
 	setCookie("retirement_length", document.getElementById('retirement_length').value)
 
+	alert("Parameters Saved")
 }
 
+/*
+Displays the results of the calculation
+*/
 function openResult(id){
 	$(".results").hide();
 	$("#"+id).show();
 }
 
+
+/*
+Shows the savings summary to display monthly savings
+*/
+function savingsSummary(){
+	var salary = document.getElementById("salary").value;
+	var savings_rate = document.getElementById("savings_rate").value;
 	
+	//ensure both numbers are valid
+	if(salary !="" && savings_rate !=""){
+		var val = Math.round(salary*savings_rate)/100;
+		var monthly = Math.round(val*100/12)/100;
+		var text = "Savings: ~ $" + monthly + "/month ($" + val + " annually)"
+		$("#savings_summary").text(text)
+	}
+	
+	//clear text if one is invalid
+	else{
+		$("#savings_summary").text("")
+	}
+}
+
+//returns true if device is mobile
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
+
 /*
 The below monitors the window and redraws the chart to ensure it is the right size
 */
