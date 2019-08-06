@@ -54,6 +54,32 @@ class Year {
 	}
 }
 
+function modalInfo(caller){
+	var id = caller.id;
+	
+	var string = '<span class="close" onclick="closeModal()">&times;</span>'
+	
+	switch(caller.id){
+	
+		case "preGrowthInfo":
+			break;
+			
+		case "postGrowthInfo":
+
+			break;
+		default:
+			return;
+	}
+	
+	//update the modal and show
+	$("#modalText").html(string);
+	$("#modalBox").show();
+}
+
+function closeModal(){
+	$("#modalBox").hide();
+}
+
 function calculate(){
 	
 	//compute the working/retirement numbers
@@ -356,9 +382,7 @@ function openResult(id){
 }
 
 
-/*
-Shows the savings summary to display monthly savings
-*/
+/*Shows the savings summary to display monthly savings*/
 function savingsSummary(){
 	var salary = document.getElementById("salary").value;
 	var savings_rate = document.getElementById("savings_rate").value;
@@ -381,6 +405,10 @@ function savingsSummary(){
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
+
+/*Temporary alert*/
+
+
 
 /*
 The below monitors the window and redraws the chart to ensure it is the right size
