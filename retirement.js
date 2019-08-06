@@ -5,6 +5,10 @@ var retiredArray = []
 $(document).ready(function(){
 	populate_defaults();
 	savingsSummary();
+	//disable tooltip on mobile
+	if(isMobileDevice()){
+		$(".tooltiptext").hide();
+	}
 });
 
 class Year {
