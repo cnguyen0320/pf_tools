@@ -54,21 +54,25 @@ class Year {
 	}
 }
 
-function modalInfo(caller){
-	var id = caller.id;
+function showModal(caller){
+	//return on non-mobile (use tooltip)
+	if(!isMobileDevice()){
+		return;
+	}
 	
+	var id = caller.id;
 	var string = '<span class="close" onclick="closeModal()">&times;</span>'
 	
-	switch(caller.id){
-	
+	switch(id){
 		case "preGrowthInfo":
+			string += "<br>This is the expected return on investment for your savings before retirement.<br><br>On average, investment return is 7% for a well diversified stock portfolio over the long term."
 			break;
-			
 		case "postGrowthInfo":
-
+			string += "<br>This is the expected return on investment for your savings after retirement. <br><br>After retirement, it is advised to pursue lower risk investments. On average, investment return on government bonds is 4% over the long term."
 			break;
 		default:
 			return;
+	
 	}
 	
 	//update the modal and show

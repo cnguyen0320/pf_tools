@@ -1,0 +1,156 @@
+<!DOCTYPE html> 
+<html>
+<title>How much is it worth</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="retirement.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="retirement.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<body class="cn-light-grey">
+	
+	<div class = "cn-content cn-container cn-padding-36">
+		<h2>How much is it worth?</h2>
+		<p>
+			This tool calculates the future value of a set amount of money after compounding interest
+		</p>
+	</div>
+	<div class = "cn-content cn-container cn-padding-36">
+		<!--User inputs-->			
+		<div class = "cn-container cn-margin-top">
+			<div class = "cn-card">
+				
+				<!--Amount-->
+				<h3 class = "cn-container cn-center cn-green">Future Value of Money</h3>
+				<div class = "row">
+					<div class = "column">
+						Amount ($):<br>
+						<input type="number" id="amount" style="width:10ch" inputmode="numeric">
+					</div>
+					<div class = "column">
+						Contribution Schedule:<br>
+						<select>
+							<option value="once">One Time</option>
+							<option value="daily">Daily</option>
+							<option value="weekly">Weekly</option>
+							<option value="monthly">Monthly</option>
+							<option value="annually">Annually</option>
+						</select>
+					</div>	
+				</div>	
+				
+				<!--Interest-->
+				<div class = "row">
+						Expected investment annual return:<br>
+						<div class="slidecontainer">
+  							<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  							<p>Value: <span id="demo"></span></p>
+						</div>
+						<input type="number" id="salary" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+
+		
+					<div class = "column">
+						Savings Rate (%):<br>
+						<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+					</div> 
+				</div>	
+				<div class = "cn-center cn-text-red" id="savings_summary"></div>
+				
+				<!-- Assumptions-->
+				<h3 class = "cn-container cn-center cn-green">Our Assumptions</h3>
+				
+				<!--Raises-->
+				<div class = "row" id = "salary_options">
+					<div class = "column">
+						Annual Raise (%/yr):<br>
+						<input type="number" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
+					</div>
+					
+					<div class = "column">
+						Pre-retirement growth (%):<br>
+						<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+					</div>
+				</div>
+				<!--Expenses-->
+				<div class = "row">
+					<div class = "column">
+						Expenses at retirement ($/yr):<br>
+						<input type="number" id="expense" min = "0" style="width:10ch" inputmode="numeric">
+					</div>
+					
+					<div class = "column">
+						Post-retirement growth (%):<br>
+						<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+					</div>
+					
+			
+				</div>
+				
+				<!--Interest-->
+				<div class = "row" id = "basic_interest_options">
+					<div class = "column">
+						Retirement expense change (%/yr):<br>
+						<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch" inputmode="numeric">
+					</div>
+					
+				</div>
+				
+				<!--Goals-->
+				<h3 class = "cn-container cn-center cn-green">Your Goals</h3>										
+				
+				<!--Retirement years-->
+				<div class = "row">
+					<div class = "column">
+						Retirement Age (yr):<br>
+						<input type="number" id="retirement_age" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+					</div>
+					<div class = "column">
+						Retirement Length (yrs):<br>
+						<input type="number" id="retirement_length" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+					</div>
+				</div>
+			</div>
+			
+			<!--Buttons-->
+			<div class = cn-center>
+				<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:65%" onclick = "calculate()">
+						Calculate
+				</button>
+				<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:33%" onclick = "saveDefault()">
+						Save
+				</button>
+			</div>
+		</div>
+		
+		<!--Results pane-->
+		<div class = "cn-container">
+			<div class = "cn-card">
+				<h3 class="cn-container cn-center cn-green">Results</h3>
+				<div class = "cn-container cn-content cn-center cn-padding-24" id = "results">
+					<div class = "results" id="chart" align='center'></div>
+					<div class = "results hide" id="table" align='center'></div>
+					
+				</div>
+				<div class="cn-bar hide" id = "results_bar">
+					<button class="cn-bar-item cn-button" onclick="openResult('chart')"><b>Chart</b></button>
+					<button class="cn-bar-item cn-button" onclick="openResult('table')"><b>Table</button>
+				</div>
+			</div>
+		</div>
+	
+	
+	<div class = "cn-content cn-container cn-padding-36">
+		<p>
+			*This tool is neither definitive nor deterministic. You should make any career, financial, or other decisions with great care.
+			Seek advice from a financial advisor before investing. <a onclick="deleteAllCookies()" style="cursor:pointer"><u>Click here</u></a> to clear saved cookies.
+		</p>
+	</div>
+	</div>
+	
+</body>
+
+</html>

@@ -24,6 +24,12 @@
 		</p>
 	</div>
 	
+	<div id="modalBox">
+		<div id = "modalText">
+		
+		</div>
+	</div>
+	
 	<div class = "cn-content cn-container cn-padding-36">
 		<form onsubmit="calculate()">	
 			<!--User inputs-->			
@@ -69,9 +75,9 @@
 						</div>
 						
 						<div class = "column">
-							Pre-retirement growth (%):<br>
+							Pre-retirement Interest (%):<br>
 							<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
-							<i class="far fa-question-circle tooltip" id="preGrowthInfo">
+							<i class="far fa-question-circle tooltip" id="preGrowthInfo" onclick="showModal(this)">
 								<span class="tooltiptext">
 									This is the expected return on investment for your savings before retirement.<br><br>
 									On average, investment return is 7% for a well diversified stock portfolio over the long term.
@@ -87,12 +93,12 @@
 						</div>
 						
 						<div class = "column">
-							Post-retirement growth (%):<br>
+							Post-retirement Interest (%):<br>
 							<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
-							<i class="far fa-question-circle tooltip" id="postGrowthInfo">
+							<i class="far fa-question-circle tooltip" id="postGrowthInfo" onclick="showModal(this)">
 								<span class="tooltiptext">
 									This is the expected return on investment for your savings after retirement. <br><br>
-									After retirement, it is advised to pursue lower risk investments, which may result in lower returns. On average, investment return on government bonds is 4% over the long term.
+									After retirement, it is advised to pursue lower risk investments. On average, investment return on government bonds is 4% over the long term.
 								</span>
 							</i>
 						</div>
