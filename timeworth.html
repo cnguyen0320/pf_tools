@@ -9,6 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="timeworth.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script src="numeral.js"></script>
 
 <body onload="calculate()" class="cn-light-grey">
@@ -61,7 +62,9 @@
 								<option value="weekly">Weekly</option>
 								<option value="biweekly">Biweekly</option>
 								<option value="monthly">Monthly</option>
-							</select>
+							</select> <i class="far fa-question-circle tooltip">
+								<span class = "tooltiptext">All schedules (except hourly) assume 40 hour working week</span>
+							</i>
 						</div>	
 					</div>	
 					<h3 class = "cn-container cn-center cn-green">What's your purchase?</h3>
@@ -80,12 +83,14 @@
 						<!--<h3>Your hourly wage is <span class = "cn-text-green" id="hourly_wage"></span></h3>-->
 						<h3>Your <span class = "cn-text-green cn-bold" id="purchase_amount"></span> purchase will cost</h3>
 						<span class = "tooltip">
-							<h3>
+							<p style = "font-size: 24px; border-bottom: 1px dotted grey; cursor:pointer">
 								<span class = "cn-text-red cn-bold" id="days"></span> <span id = "day_label">days</span>
 								<span class = "cn-text-red cn-bold" id="hours"></span> <span id = "hour_label">hours</span>
 								<span class = "cn-text-red cn-bold" id="minutes"></span> <span id = "minute_label">minutes</span>
-							</h3>
+							</p> 
 							<span class="tooltiptext">Assumes working day of 8 hours</span>
+							<br>
+							<br>
 						</span>
 					</div>
 				</div>
