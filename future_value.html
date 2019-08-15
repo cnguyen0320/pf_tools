@@ -1,0 +1,107 @@
+<!DOCTYPE html> 
+<html>
+<title>What will it be worth</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="finance.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="future_value.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="numeral.js"></script>
+
+<body onload="calculate()" class="cn-light-grey">
+
+	<!--Navigation Bar-->
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<div class="dropdown">
+    		<button class="dropbtn">Basic Tools </button>
+    		<div class="dropdown-content">
+				<a href = "timeworth.html">Dollars to time</a>
+				<a href = "future_value.html">Future money value</a>
+    		</div>
+  		</div>
+  		<div class="dropdown">
+    		<button class="dropbtn">Advanced Tools </button>
+    		<div class="dropdown-content">
+				<a href = "retirement.html">Retirement calculator</a>
+    		</div>
+  		</div> 
+	</div>
+	<div class = "cn-content cn-card cn-container cn-padding-24 cn-white">
+		<div class = "cn-content cn-container cn-padding-36">
+			<h2>What will it be worth?</h2>
+			<p>
+				Every time you spend money, you are missing out on an opportunity to let it grow into the future. 
+				Use this tool to see how much  the money you want to spend today will be worth in the future.
+			</p>
+		</div>
+		<div class = "cn-content cn-container cn-padding-36">
+			<!--User inputs-->			
+			<div class = "cn-container cn-margin-top">
+				<div class = "cn-card">
+				
+					<!--Amount-->
+					<h3 class = "cn-container cn-center cn-green">Future Value of Money</h3>
+					<div class = "row">
+						<div class = "column">
+							Amount ($):<br>
+							<input type="number" value="100" id="amount" style="width:12ch" inputmode="numeric" oninput="calculate()">
+						</div>
+						<div class = "column">
+							Contributions:<br>
+							<select id="schedule" oninput="calculate()">
+								<option value="once">One Time</option>
+								<option value="daily">Daily</option>
+								<option value="weekly">Weekly</option>
+								<option value="monthly">Monthly</option>
+								<option value="annually">Annually</option>
+							</select>
+						</div>	
+					</div>	
+				
+					<!--Interest-->
+					<div class = "row">
+						<div class = "column">
+							Annual investment return:<br>
+							<div id="interest">7%</div>
+						</div>
+		
+						<div class = "column">
+							Years of Growth:<br>
+							<div id="years">10 years</div>
+						</div>
+					</div>	
+				
+					<div class = "row">
+				
+						<div class = "column">
+							<input type="range" min="0" max="50" value="7" step="0.5" class="slider" id="interestIn" oninput="calculate()">
+						</div>
+						<div class = "column">
+							<input type="range" min="1" max="100" value="10" class="slider" id="yearIn" oninput="calculate()">
+						</div>
+					</div>
+					<!--Results-->
+					<h3 class = "cn-container cn-center cn-green cn-margin-bottom">Results</h3>
+						<div class = "cn-container cn-centered">
+							<h3>Future Value:<br></h3>
+							<h2 class= "cn-text-green cn-bold" id="result"></h2>
+							<br>
+						</div>
+			</div>
+		</div>
+		<hr>
+		<footer class="cn-container cn-centered cn-bold cn-text-green">
+			<p>Thanks for using my tool.<br> <a href="http://cnguyen0320.github.io/contactme">Contact me</a> if you have any questions.</p>
+		</footer>
+		</div>
+	<div>
+	
+	
+	
+</body>
+
+</html>

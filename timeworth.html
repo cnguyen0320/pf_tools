@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html>
+<title>Is it worth your time?</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="finance.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="timeworth.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="numeral.js"></script>
+
+<body onload="calculate()" class="cn-light-grey">
+
+	<!--Navigation Bar-->
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<div class="dropdown">
+    		<button class="dropbtn">Basic Tools 
+      			
+    		</button>
+    		<div class="dropdown-content">
+				<a href = "timeworth.html">Dollars to time</a>
+				<a href = "future_value.html">Future money value</a>
+    		</div>
+  		</div>
+  		<div class="dropdown">
+    		<button class="dropbtn">Advanced Tools 
+      			
+    		</button>
+    		<div class="dropdown-content">
+				<a href = "retirement.html">Retirement calculator</a>
+    		</div>
+  		</div> 
+	</div>
+	<div class = "cn-content cn-card cn-container cn-padding-24 cn-white">
+		<div class = "cn-content cn-container cn-padding-36">
+			<h2>Is it worth your time?</h2>
+			<p>
+				You spend time to make money. So when you buy something, you're actually trading your time for it. 
+				Is that purchase really worth the time you spent working for it? Use this tool to find out.
+			</p>
+		</div>
+		<div class = "cn-content cn-container cn-padding-36">
+			<!--User inputs-->			
+			<div class = "cn-container cn-margin-top">
+				<div class = "cn-card">
+					<!--Salary info-->
+					<h3 class = "cn-container cn-center cn-green">What's your time worth?</h3>
+					<div class = "row">
+						<div class = "column">
+							Wage ($):<br>
+							<input type="number" value="75000" id="wage" style="width:12ch" inputmode="numeric" oninput="calculate()">
+						</div>
+						<div class = "column">
+							Pay Schedule:<br>
+							<select id="schedule" oninput="calculate()">
+								<option value="salary">Salary</option>
+								<option value="hourly">Hourly</option>
+								<option value="weekly">Weekly</option>
+								<option value="biweekly">Biweekly</option>
+								<option value="monthly">Monthly</option>
+							</select>
+						</div>	
+					</div>	
+					<h3 class = "cn-container cn-center cn-green">What's your purchase?</h3>
+					<div class= "row">					
+						<div class = "cn-container">
+							Purchase Amount ($):<br>
+							<input type="number" value="100" id="amount" style="width:12ch" inputmode="numeric" oninput="amount_update(this)"><br>
+							<input type="range" min="0" max="10000" value="100" step="1" class="slider" id="amount_slider" oninput="amount_update(this)">
+
+						</div>
+					</div>
+				
+					<!--Results-->
+					<h3 class = "cn-container cn-center cn-green">Results</h3>
+					<div class = "cn-container cn-centered">
+						<!--<h3>Your hourly wage is <span class = "cn-text-green" id="hourly_wage"></span></h3>-->
+						<h3>Your <span class = "cn-text-green cn-bold" id="purchase_amount"></span> purchase will cost</h3>
+						<span class = "tooltip">
+							<h3>
+								<span class = "cn-text-red cn-bold" id="days"></span> <span id = "day_label">days</span>
+								<span class = "cn-text-red cn-bold" id="hours"></span> <span id = "hour_label">hours</span>
+								<span class = "cn-text-red cn-bold" id="minutes"></span> <span id = "minute_label">minutes</span>
+							</h3>
+							<span class="tooltiptext">Assumes working day of 8 hours</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+	<footer class="cn-container cn-centered cn-bold cn-text-green">
+        <p>Thanks for using my tool.<br> <a href="http://cnguyen0320.github.io/contactme">Contact me</a> if you have any questions.</p>
+    </footer>
+	</div>
+	
+</body>
+
+</html>

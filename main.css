@@ -299,6 +299,10 @@ a {
 	color: inherit
 }
 
+.cn-bold{
+	font-weight: bold;
+}
+
 .cn-table,
 .cn-table-all {
 	border-collapse: collapse;
@@ -1567,9 +1571,8 @@ li.nav_item:hover {
 }
 
 li.nav_item a.active_nav {
-	background-color: #9370DB;
+	background-color: #4CAF50;
 }
-
 
 /*YouTube embedded styling*/
 .embed-container {

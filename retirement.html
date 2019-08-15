@@ -1,0 +1,201 @@
+<!DOCTYPE html> 
+<html>
+<title>Retirement Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="finance.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="retirement.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="numeral.js"></script>
+
+<body class="cn-light-grey">
+	
+	<!--Navigation Bar-->
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<div class="dropdown">
+    		<button class="dropbtn">Basic Tools 
+      			
+    		</button>
+    		<div class="dropdown-content">
+				<a href = "timeworth.html">Dollars to time</a>
+				<a href = "future_value.html">Future money value</a>
+    		</div>
+  		</div>
+  		<div class="dropdown">
+    		<button class="dropbtn">Advanced Tools 
+      			
+    		</button>
+    		<div class="dropdown-content">
+				<a href = "retirement.html">Retirement calculator</a>
+    		</div>
+  		</div> 
+	</div>
+	
+	<div class="header"></div>
+	
+	<div class = "cn-content cn-card cn-container cn-padding-24 cn-white">
+	
+		<div class = "cn-content cn-container cn-padding-36">
+			<h2>When can you retire?</h2>
+			<p>
+				This tool calculates your retirement outlook, allowing you to tweak parameters and
+				simulate different situations in order to reach your goal.
+				Input your parameters and click calculate to receive a graph and detailed data.
+				You can also save your input values to cookies to retain your values for a later date.
+			</p>
+		</div>
+	
+		<div id="modalBox">
+			<div id = "modalText"></div>
+		</div>
+	
+		<div class = "cn-content cn-container cn-padding-36">
+			<form onsubmit="calculate()">	
+				<!--User inputs-->			
+				<div class = "cn-container cn-margin-top">
+					<div class = "cn-card">
+					<h3 class = "cn-container cn-center cn-green">Known values today</h3>
+					
+						<!--Savings and Age-->
+						<div class = "row">
+							<div class = "column">
+								Current Savings ($):<br>
+								<input type="number" id="current_savings" style="width:10ch" inputmode="numeric">
+							</div>
+			
+							<div class = "column">
+								Current Age (yr):<br>
+								<input type="number" pattern = "[0-9*]"id="age" min = "0" max = "999" style="width:10ch" inputmode="numeric">
+							</div>
+						</div>	
+					
+						<!--Salary-->
+						<div class = "row">
+							<div class = "column">
+								Salary ($/yr):<br>
+								<input type="number" id="salary" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+							</div>
+			
+							<div class = "column">
+								Savings Rate (%):<br>
+								<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+							</div> 
+						</div>	
+						<div class = "cn-center cn-text-red" id="savings_summary"></div>
+					
+						<!-- Assumptions-->
+						<h3 class = "cn-container cn-center cn-green">Our Assumptions</h3>
+					
+						<!--Pre Retire-->
+						<div class = "row" id = "salary_options">
+							<div class = "column">
+								Annual Raise (%/yr):<br>
+								<input type="number" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
+							</div>
+						
+							<div class = "column">
+								Pre-retirement Interest (%):<br>
+								<input type="number" id="pre_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+								<i class="far fa-question-circle tooltip" id="preGrowthInfo" onclick="showModal(this)">
+									<span class="tooltiptext">
+										This is the expected return on investment for your savings before retirement.<br><br>
+										On average, investment return is 7% for a well diversified stock portfolio over the long term.
+									</span>
+								</i>
+							</div>
+						</div>
+						<!--Post Retire-->
+						<div class = "row">
+							<div class = "column">
+								Expenses at retirement ($/yr):<br>
+								<input type="number" id="expense" min = "0" style="width:10ch" inputmode="numeric">
+							</div>
+						
+							<div class = "column">
+								Post-retirement Interest (%):<br>
+								<input type="number" id="post_interest" step = "0.5" min = "-99.99" max = "99.99" style="width:10ch" inputmode="numeric">
+								<i class="far fa-question-circle tooltip" id="postGrowthInfo" onclick="showModal(this)">
+									<span class="tooltiptext">
+										This is the expected return on investment for your savings after retirement. <br><br>
+										After retirement, it is advised to pursue lower risk investments. On average, investment return on government bonds is 4% over the long term.
+									</span>
+								</i>
+							</div>
+						
+				
+						</div>
+					
+						<!--Interest-->
+						<div class = "row" id = "basic_interest_options">
+							<div class = "column">
+								Retirement expense change (%/yr):<br>
+								<input type="number" id="expense_change" min = "-100" max = "100" step = "0.5" style="width:10ch" inputmode="numeric">
+							</div>
+						
+						</div>
+					
+						<!--Goals-->
+						<h3 class = "cn-container cn-center cn-green">Your Goals</h3>										
+					
+						<!--Retirement years-->
+						<div class = "row">
+							<div class = "column">
+								Retirement Age (yr):<br>
+								<input type="number" id="retirement_age" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+							</div>
+							<div class = "column">
+								Retirement Length (yrs):<br>
+								<input type="number" id="retirement_length" min = "0" max = "9999" style="width:10ch" inputmode="numeric">
+							</div>
+						</div>
+					</div>
+				
+					<!--Buttons-->
+					<div class = cn-center>
+						<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:65%" onclick = "calculate()">
+								Calculate
+						</button>
+						<button class = "cn-margin-top "type = "button" style= "padding:10px 1%; width:33%" onclick = "saveDefault()">
+								Save
+						</button>
+					</div>
+				</div>
+			</form>
+		
+			<!--Results pane-->
+			<div class = "cn-container">
+				<div class = "cn-card">
+					<h3 class="cn-container cn-center cn-green">Results</h3>
+					<div class = "cn-container cn-content cn-center cn-padding-24" id = "results">
+						<div class = "results" id="chart" align='center'></div>
+						<div class = "results hide" id="table" align='center'></div>
+					
+					</div>
+					<div class="cn-bar hide" id = "results_bar">
+						<button class="cn-bar-item cn-button" onclick="openResult('chart')"><b>Chart</b></button>
+						<button class="cn-bar-item cn-button" onclick="openResult('table')"><b>Table</button>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class = "cn-content cn-container cn-padding-36">
+		<p>
+			*This tool is neither definitive nor deterministic. You should make any career, financial, or other decisions with great care.
+			Seek advice from a financial advisor before investing. <a onclick="deleteAllCookies()" style="cursor:pointer"><u>Click here</u></a> to clear saved cookies.
+		</p>
+	</div>
+	<hr>
+	<footer class="cn-container cn-centered cn-bold cn-text-green">
+        <p>Thanks for using my tool.<br> <a href="http://cnguyen0320.github.io/contactme">Contact me</a> if you have any questions.</p>
+    </footer>
+	</div>
+	
+</body>
+
+</html>

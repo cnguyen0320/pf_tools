@@ -9,6 +9,7 @@ $(document).ready(function(){
 	if(isMobileDevice()){
 		$(".tooltiptext").hide();
 	}
+	$('#header').load('reusableheader.html');
 });
 
 class Year {
@@ -41,7 +42,7 @@ class Year {
 		});
 		
 		var string = '<div align = "left" style=" font-family:Arial; width: 20ch">'
-		string+="<b>"+this.age + "</b><br>"
+//		string+="<b>"+this.age + "</b><br>"
 		
 		//add opening assets
 		string += "BoY: <b>" + formatter.format(Math.round(this.boy)) + "</b><br>"
@@ -138,7 +139,8 @@ function drawTable(){
 		height: height_val,
 		style: 'font-family:Verdana',
 		sort: 'disable',
-		backgroundColor: { fill:'transparent' }
+		backgroundColor: { fill:'transparent' },
+		
 	}
 	
 	var formatter = new google.visualization.NumberFormat({prefix: '$', negativeColor: 'red', negativeParens: true});
@@ -189,13 +191,21 @@ function drawChart(){
 		height_val = 250
 	}
 	var options = {
-		tooltip: {isHtml: true},
+		focusTarget: 'category',
+		crosshair: {trigger: 'both',
+					orientation: "vertical"
+					},
+		tooltip: {isHtml: true,
+				  trigger: 'both'
+				  },
+		
 		vAxis: {
           title: 'Savings ($)',
           format: "short"
         },
         hAxis: {
           title: 'Year',
+          minValue: workingArray[0].age-5,
           maxValue: retiredArray[retiredArray.length-1].age + 5
         },
         width: "auto",
@@ -399,7 +409,7 @@ function savingsSummary(){
 	if(salary !="" && savings_rate !=""){
 		var val = Math.round(salary*savings_rate)/100;
 		var monthly = Math.round(val*100/12)/100;
-		var text = "Savings: ~ $" + monthly + "/month ($" + val + " annually)"
+		var text = "Savings: ~ " + numeral(monthly).format('$0,0') + "/month (" + numeral(val).format('$0,0') + " annually)"
 		$("#savings_summary").text(text)
 	}
 	
