@@ -16,6 +16,12 @@
   clear: both;
 }
 
+.col4 {
+float: left;
+width: 25%;
+padding: 10px;
+}
+
 .hide{
 	display: none;
 }

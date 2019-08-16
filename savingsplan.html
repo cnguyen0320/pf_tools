@@ -1,13 +1,13 @@
 <!DOCTYPE html> 
 <html>
-<title>What will it be worth</title>
+<title>How much should you save?</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="finance.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="future_value.js"></script>
+<script src="savingsplan.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="numeral.js"></script>
 
@@ -33,10 +33,12 @@
 	</div>
 	<div class = "cn-content cn-card cn-container cn-padding-24 cn-white">
 		<div class = "cn-content cn-container cn-padding-36">
-			<h2>What will it be worth?</h2>
+			<h2>How much should you save?</h2>
 			<p>
-				Every time you spend money, you are missing out on an opportunity to let it grow into the future. 
-				Use this tool to see how much  the money you want to spend today will be worth in the future.
+				Saving a million dollars for retirement sounds intimidating. But if you break it down, you could do it for just $13 a day!
+			</p>
+			<p>
+				Use this tool to make saving for a large goal more manageable.
 			</p>
 		</div>
 		<div class = "cn-content cn-container cn-padding-36">
@@ -45,53 +47,69 @@
 				<div class = "cn-card">
 				
 					<!--Amount-->
-					<h3 class = "cn-container cn-center cn-green">Future Value of Money</h3>
+					<h3 class = "cn-container cn-center cn-green">How much should you save?</h3>
 					<div class = "row">
 						<div class = "column">
-							Amount ($):<br>
-							<input type="number" value="100" id="amount" style="width:12ch" inputmode="numeric" oninput="calculate()">
+							Target Value ($):<br>
+							<input type="number" value="1000000" id="target" style="width:12ch" inputmode="numeric" oninput="calculate()">
 						</div>
+						
 						<div class = "column">
-							Contributions:<br>
-							<select id="schedule" oninput="calculate()">
-								<option value="once">One Time</option>
-								<option value="daily">Daily</option>
-								<option value="weekly">Weekly</option>
-								<option value="monthly">Monthly</option>
-								<option value="annually">Annually</option>
-							</select>
-						</div>	
+							Current Value ($):<br>
+							<input type="number" value="0" id="current" style="width:12ch" inputmode="numeric" oninput="calculate()">
+						</div>
 					</div>	
 				
 					<!--Slider labels-->
 					<div class = "row">
 						<div class = "column">
-							Years of Growth:<br>
-							<div id="years">10 years</div>
+							Years to reach target:<br>
+							<span id = "years_label" class="cn-bold"></span>
 						</div>
-						
+					
 						<div class = "column">
 							Annual investment return:<br>
-							<div id="interest">7%</div>
-						</div>
-					</div>	
-				
-				<!--Sliders-->
-					<div class = "row">
-						<div class = "column">
-							<input type="range" min="0" max="50" value="7" step="0.5" class="slider" id="interestIn" oninput="calculate()">
-						</div>
-						
-						<div class = "column">
-							<input type="range" min="1" max="100" value="10" class="slider" id="yearIn" oninput="calculate()">
+							<span id = "interest_label" class="cn-bold"></span>
 						</div>
 					</div>
+					
+					<!--Sliders-->
+					<div class = "row">
+						<div class = "column">
+							<input type="range" min="0" max="50" value="40" step="1" class="slider" id="years" oninput="calculate()">
+						</div>
+					
+						<div class = "column">
+							<input type="range" min="0" max="20" value="7" step="0.5" class="slider" id="interest" oninput="calculate()">
+						</div>
+					</div>
+					
 					
 					<!--Results-->
 					<h3 class = "cn-container cn-center cn-green cn-margin-bottom">Results</h3>
 						<div class = "cn-container cn-centered">
-							<h3>Future Value:<br></h3>
-							<h2 class= "cn-text-green cn-bold" id="result"></h2>
+							<h3>Reach your goal by saving:</h3>
+							<div class = "row">
+								<h5>
+									<span class = "col4">Annually</span>
+									<span class = "col4">Monthly</span>
+									<span class = "col4">Weekly</span>
+									<span class = "col4">Daily</span>
+								</h5>
+							</div>
+							<div class = "row">
+								<div class = "col4 cn-bold cn-text-red"><h3 id = "annual"></h3></div>
+								<div class = "col4 cn-bold cn-text-red"><h3 id = "monthly"></h3></div>
+								<div class = "col4 cn-bold cn-text-red"><h3 id = "weekly"></h3></div>
+								<div class = "col4 cn-bold cn-text-red"><h3 id = "daily"></h3></div>
+							</div>
+						</div>
+						
+					<h3 class = "cn-container cn-center cn-green cn-margin-bottom" onclick="toggle_results()" style="cursor:pointer">
+						Table of Results
+					</h3>
+						<div class = "cn-container cn-centered cn-hide" id="result_container">
+							<div style="font-weight:normal" id="result"></div>
 							<br>
 						</div>
 			</div>
