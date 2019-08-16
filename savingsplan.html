@@ -76,11 +76,11 @@
 					<!--Sliders-->
 					<div class = "row">
 						<div class = "column">
-							<input type="range" min="0" max="50" value="40" step="1" class="slider" id="years" oninput="calculate()">
+							<input type="range" min="0" max="50" value="40" step="1" class="slider" id="years" onchange="calculate()">
 						</div>
 					
 						<div class = "column">
-							<input type="range" min="0" max="20" value="7" step="0.5" class="slider" id="interest" oninput="calculate()">
+							<input type="range" min="1" max="20" value="7" step="0.5" class="slider" id="interest" oninput="calculate()">
 						</div>
 					</div>
 					
@@ -88,7 +88,11 @@
 					<!--Results-->
 					<h3 class = "cn-container cn-center cn-green cn-margin-bottom">Results</h3>
 						<div class = "cn-container cn-centered">
-							<h3>Reach your goal by saving:</h3>
+							<h3>
+								Reach your goal in 
+								<span class = "cn-bold cn-text-green" id="year_result"></span>
+								<span id="year_result_label"></span> 
+								by saving:</h3>
 							<div class = "row">
 								<h5>
 									<span class = "col4">Annually</span>

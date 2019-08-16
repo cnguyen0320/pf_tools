@@ -1,16 +1,18 @@
-function periodize(target, current, years, interest, ppy){
-	var	amount = (target - current*(Math.pow(1+interest/ppy,years*ppy)))/((Math.pow((1+interest/ppy),years*ppy)-1) * (ppy/interest))
-	return amount;
-}
-
-function calculate(){
+function update(){
 	var interest = Number(document.getElementById("interest").value);
 	var years = Number(document.getElementById("years").value);
 	
 	//update info on slider
 	document.getElementById("years_label").innerHTML = years + " years";
 	document.getElementById("interest_label").innerHTML = interest + "%";
-	
+}
+function periodize(target, current, years, interest, ppy){
+	var	amount = (target - current*(Math.pow(1+interest/ppy,years*ppy)))/((Math.pow((1+interest/ppy),years*ppy)-1) * (ppy/interest))
+	return amount;
+}
+
+function calculate(){
+	update()
 	//initiate the google data table
 	google.charts.load('current', {'packages':['table']});
 	google.charts.setOnLoadCallback(calculate_table);
@@ -24,7 +26,7 @@ function calculate_table(){
 	var years = Number(document.getElementById("years").value);
 	interest = interest/100;	
 
-	var data = new google.visualization.DataTable()
+	let data = new google.visualization.DataTable()
 	data.addColumn('number', 'Year')
 	data.addColumn('number', 'Annually')
 	data.addColumn('number', 'Monthly')
@@ -39,12 +41,21 @@ function calculate_table(){
 		var yearly = Math.round(periodize(target,current,year, interest, 1));
 		
 		if(daily<0 || weekly < 0 || monthly < 0 || yearly < 0){
-			var row = data.getNumberOfRows()-1;
 			
-			document.getElementById("annual").innerHTML = numeral(data.getValue(row,1)).format("$0,0[.]00")
-			document.getElementById("monthly").innerHTML = numeral(data.getValue(row,2)).format("$0,0[.]00")
-			document.getElementById("weekly").innerHTML = numeral(data.getValue(row,3)).format("$0,0[.]00")
-			document.getElementById("daily").innerHTML = numeral(data.getValue(row,4)).format("$0,0[.]00")
+			if(year<years){
+				var row = data.getNumberOfRows()-1;
+				document.getElementById("annual").innerHTML = numeral(data.getValue(row,1)).format("$0,0[.]00")
+				document.getElementById("monthly").innerHTML = numeral(data.getValue(row,2)).format("$0,0[.]00")
+				document.getElementById("weekly").innerHTML = numeral(data.getValue(row,3)).format("$0,0[.]00")
+				document.getElementById("daily").innerHTML = numeral(data.getValue(row,4)).format("$0,0[.]00")
+				document.getElementById("year_result").innerHTML = String(year-1)
+				if(year==2){
+					 document.getElementById("year_result_label").innerHTML= "year"
+				}
+				else{
+					 document.getElementById("year_result_label").innerHTML= "years"
+				}
+			}
 			break;
 		}
 		
@@ -57,6 +68,13 @@ function calculate_table(){
 				document.getElementById("monthly").innerHTML = numeral(monthly).format("$0,0[.]00")
 				document.getElementById("weekly").innerHTML = numeral(weekly).format("$0,0[.]00")
 				document.getElementById("daily").innerHTML = numeral(daily).format("$0,0[.]00")
+				document.getElementById("year_result").innerHTML = String(year)
+				if(year==2){
+				 	document.getElementById("year_result_label").innerHTML= "year"
+				}
+				else{
+				 document.getElementById("year_result_label").innerHTML= "years"
+				}
 			}
 		}
 		
