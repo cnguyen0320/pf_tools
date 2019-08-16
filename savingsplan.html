@@ -76,7 +76,7 @@
 					<!--Sliders-->
 					<div class = "row">
 						<div class = "column">
-							<input type="range" min="0" max="50" value="40" step="1" class="slider" id="years" onchange="calculate()">
+							<input type="range" min="0" max="50" value="40" step="1" class="slider" id="years" oninput="calculate()">
 						</div>
 					
 						<div class = "column">
@@ -93,19 +93,23 @@
 								<span class = "cn-bold cn-text-green" id="year_result"></span>
 								<span id="year_result_label"></span> 
 								by saving:</h3>
-							<div class = "row">
-								<h5>
-									<span class = "col4">Annually</span>
-									<span class = "col4">Monthly</span>
-									<span class = "col4">Weekly</span>
-									<span class = "col4">Daily</span>
-								</h5>
-							</div>
-							<div class = "row">
-								<div class = "col4 cn-bold cn-text-red"><h3 id = "annual"></h3></div>
-								<div class = "col4 cn-bold cn-text-red"><h3 id = "monthly"></h3></div>
-								<div class = "col4 cn-bold cn-text-red"><h3 id = "weekly"></h3></div>
-								<div class = "col4 cn-bold cn-text-red"><h3 id = "daily"></h3></div>
+							<div class = "cn-container">
+								<span class = "col4">
+									Annually<br>
+									<span class = "cn-textsize-h3 cn-bold cn-text-red"id="annual"></span><br>
+								</span>
+								<span class = "col4">
+									Monthly<br>
+									<span class = "cn-textsize-h3 cn-bold cn-text-red"id="monthly"></span><br>
+								</span>
+								<span class = "col4">
+									Weekly<br>
+									<span class = "cn-textsize-h3 cn-bold cn-text-red"id="weekly"></span><br>
+								</span>
+								<span class = "col4">
+									Daily<br>
+									<span class = "cn-textsize-h3 cn-bold cn-text-red"id="daily"></span><br>
+								</span>
 							</div>
 						</div>
 						

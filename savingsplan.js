@@ -1,3 +1,29 @@
+$(document).ready(function(){
+	if(isMobileDevice()){
+		var arr = document.getElementsByClassName("col4")
+		
+		while(arr.length>0){
+			var ele = arr[0]
+			ele.innerHTML = ele.innerHTML.replace("<br>",": ")
+			ele.classList.add("row")
+			ele.classList.add("cn-textsize-h5")
+			ele.classList.remove("col4")
+		}
+		
+		var ids = ["annual","monthly","weekly","daily"]
+		
+		for(id of ids){
+			var ele = document.getElementById(id)
+			ele.classList.add("col")
+		}
+		
+	}
+});
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
+
 function update(){
 	var interest = Number(document.getElementById("interest").value);
 	var years = Number(document.getElementById("years").value);
