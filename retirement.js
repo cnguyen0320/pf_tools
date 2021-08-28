@@ -232,8 +232,8 @@ function compute(){
 		var assets = Number(document.getElementById("current_savings").value);
 		var age = Number(document.getElementById("age").value);
 		var salary = Number(document.getElementById("salary").value);
-		var savings_rate = Number(document.getElementById("savings_rate").value) / 100.0;
-		var raise = Number(document.getElementById("raise").value)/ 100.0;
+		var annual_savings = Number(document.getElementById("annual_savings").value);
+		var raise = Number(document.getElementById("raise").value);
 		var expense = Number(document.getElementById('expense').value);
 		var expense_change = Number(document.getElementById('expense_change').value)/100.0;
 		var pre_interest = Number(document.getElementById("pre_interest").value) / 100.0;
@@ -251,18 +251,10 @@ function compute(){
 	
 		while(age < retirement_age){
 			var start = assets
-			var monthly_gain = salary/12 * savings_rate
-			var monthly_interest = pre_interest/12
 			var interest_gain = 0
 			
-			//calculate gains and interest on a monthly basis
-			/*for(var i = 0; i < 12; i++){
-				interest_gain += assets * (monthly_interest)
-				assets = (assets + monthly_gain)*(1+monthly_interest)
-			}
-			*/
 			interest_gain = assets*(pre_interest)
-			assets += salary*savings_rate + interest_gain
+			assets += annual_savings + interest_gain
 			
 			var cash_flow = assets - start
 		
@@ -275,7 +267,7 @@ function compute(){
 		
 			//calculate YoY changes
 			age++;
-			salary *= (1+raise)
+			annual_savings += raise;
 		}
 	
 		/*
@@ -309,11 +301,11 @@ function compute(){
  * Populates the values using cookies or a saved default value set
 */
 function populate_defaults(){
-	document.getElementById('current_savings').value = 20000;
-	document.getElementById('age').value = 24;
-	document.getElementById('salary').value = 60000;
-	document.getElementById('savings_rate').value = 20;
-	document.getElementById('raise').value = 1;
+	document.getElementById('current_savings').value = 100000;
+	document.getElementById('age').value = 27;
+	document.getElementById('salary').value = 100000;
+	document.getElementById('annual_savings').value = 30000;
+	document.getElementById('raise').value = 100;
 	document.getElementById('expense').value = 50000;
 	document.getElementById('expense_change').value = 0;
 	document.getElementById('pre_interest').value = 7;
@@ -325,7 +317,7 @@ function populate_defaults(){
 	if(value = getCookie('current_savings')) document.getElementById('current_savings').value = value
 	if(value = getCookie('age')) document.getElementById('age').value = value
 	if(value = getCookie('salary')) document.getElementById('salary').value = value
-	if(value = getCookie('savings_rate')) document.getElementById('savings_rate').value = value
+	if(value = getCookie('annual_savings')) document.getElementById('annual_savings').value = value
 	if(value = getCookie('raise')) document.getElementById('raise').value = value
 	if(value = getCookie('expense')) document.getElementById('expense').value = value
 	if(value = getCookie('expense_change')) document.getElementById('expense_change').value = value
@@ -379,7 +371,7 @@ function saveDefault(){
 	setCookie("current_savings", document.getElementById('current_savings').value)
 	setCookie("age", document.getElementById('age').value)
 	setCookie("salary", document.getElementById('salary').value)
-	setCookie("savings_rate", document.getElementById('savings_rate').value)
+	setCookie("annual_savings", document.getElementById('annual_savings').value)
 	setCookie("raise", document.getElementById('raise').value)
 	setCookie("expense", document.getElementById('expense').value)
 	setCookie("expense_change", document.getElementById('expense_change').value)
@@ -403,14 +395,15 @@ function openResult(id){
 /*Shows the savings summary to display monthly savings*/
 function savingsSummary(){
 	var salary = document.getElementById("salary").value;
-	var savings_rate = document.getElementById("savings_rate").value;
+	var annual_savings = document.getElementById("annual_savings").value;
 	
 	//ensure both numbers are valid
-	if(salary !="" && savings_rate !=""){
-		var val = Math.round(salary*savings_rate)/100;
-		var monthly = Math.round(val*100/12)/100;
-		var text = "Savings: ~ " + numeral(monthly).format('$0,0') + "/month (" + numeral(val).format('$0,0') + " annually)"
+	if(salary !="" && annual_savings !=""){
+		var val = Math.round(Number(annual_savings)/Number(salary)*100);
+		var monthly = Number(annual_savings) / 12;
+		var text = "Savings: ~ " + numeral(monthly).format('$0,0') + "/month (" + val + "% annually)"
 		$("#savings_summary").text(text)
+		console.log(val)
 	}
 	
 	//clear text if one is invalid

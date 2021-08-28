@@ -83,8 +83,8 @@
 							</div>
 			
 							<div class = "column">
-								Savings Rate (%):<br>
-								<input type="number" id="savings_rate" min = "0" max = "100" step = "0.1" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
+								Annual Savings ($):<br>
+								<input type="number" id="annual_savings" step = "1000" style="width:10ch" inputmode="numeric" oninput="savingsSummary()">
 							</div> 
 						</div>	
 						<div class = "cn-center cn-text-red" id="savings_summary"></div>
@@ -95,8 +95,8 @@
 						<!--Pre Retire-->
 						<div class = "row" id = "salary_options">
 							<div class = "column">
-								Annual Raise (%/yr):<br>
-								<input type="number" id="raise" step = "0.1" style="width:10ch" inputmode="numeric">
+								Annual Savings Addition ($/yr):<br>
+								<input type="number" id="raise" step = "100" style="width:10ch" inputmode="numeric">
 							</div>
 						
 							<div class = "column">
